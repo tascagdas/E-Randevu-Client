@@ -17,14 +17,36 @@
               minlength="3"
             />
           </div>
-          <div class="form-group mt-2">
+          <div class="form-group mt-2 position-relative">
             <label for="password">Parola</label>
             <input
+            #passwordInput
               type="password"
               name="password"
               class="form-control"
               required
             />
+            @if(passwordInput.type =='password'){
+            <lucide-icon
+            (click)="handleShowPassword()"
+              style="
+                position: absolute;
+                top: 30px;
+                right: 10px;
+                cursor: pointer;
+              "
+              name="eye"
+            ></lucide-icon>
+            }@else {
+            <lucide-icon
+            (click)="handleShowPassword()"
+            style="
+                position: absolute;
+                top: 30px;
+                right: 10px;
+                cursor: pointer;
+              " name="eye-off"></lucide-icon>
+            }
           </div>
           <div class="form-group mt-2">
             <button class="btn btn-dark w-50">
