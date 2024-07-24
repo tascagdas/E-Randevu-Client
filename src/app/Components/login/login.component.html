@@ -1,2 +1,39 @@
-<p>login works!</p>
+<div class="row d-flex justify-content-center align-items-center" style="height: 98vh;">
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3>Oturum Aç</h3>
+        <p>Oturum açmak için bilgileri giriniz</p>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="userNameOrEmail">Kullanıcı adı veya Email</label>
+            <input
+              type="text"
+              name="userNameOrEmail"
+              class="form-control"
+              required
+              minlength="3"
+            />
+          </div>
+          <div class="form-group mt-2">
+            <label for="password">Parola</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="form-group mt-2">
+            <button class="btn btn-dark w-50">
                 <lucide-icon name="log-in" class="me-1"></lucide-icon>
+                Oturum Aç
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
