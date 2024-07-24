@@ -9,7 +9,7 @@
         <p>Oturum açmak için bilgileri giriniz</p>
       </div>
       <div class="card-body">
-        <form>
+        <form #loginForm="ngForm" autocomplete="off" formValidate>
           <div class="form-group">
             <label for="userNameOrEmail">Kullanıcı adı veya Email</label>
             <input
@@ -18,7 +18,9 @@
               class="form-control"
               required
               minlength="3"
+              [(ngModel)]="login.userNameOrEmail"
             />
+            <div class="invalid-feedback"></div>
           </div>
           <div class="form-group mt-2 position-relative">
             <label for="password">Parola</label>
@@ -28,7 +30,9 @@
               name="password"
               class="form-control"
               required
+               [(ngModel)]="login.password"
             />
+            <div class="invalid-feedback"></div>
             @if(passwordInput.type =='password'){
             <lucide-icon
             (click)="handleShowPassword()"
