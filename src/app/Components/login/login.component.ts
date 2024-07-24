@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { LoginModel } from '../../models/login.model';
 import { FormValidateDirective } from 'form-validate-angular';
