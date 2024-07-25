@@ -20,7 +20,7 @@ export class AuthService {
       const exp = decode.exp;
       const now = new Date().getTime() / 1000;
       
-      if (now < exp) {
+      if (now > exp) {
         localStorage.removeItem('token');
         this.router.navigateByUrl('/login');
         return false;
