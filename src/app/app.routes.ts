@@ -3,6 +3,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { LayoutsComponent } from './Components/layouts/layouts.component';
 import { HomeComponent } from './Components/home/home.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 export const routes: Routes = [
   {
@@ -12,6 +14,7 @@ export const routes: Routes = [
     {
         path: "",
         component: LayoutsComponent,
+        canActivateChild:[()=>inject(AuthService).isAuthenticated()],
         children: [
             {
                 path: "",
