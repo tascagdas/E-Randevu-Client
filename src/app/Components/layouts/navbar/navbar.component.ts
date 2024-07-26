@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule,RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
