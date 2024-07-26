@@ -1,6 +1,6 @@
-export class ResultModel<T>{
-    data?: T
-    errorMessages?: string[]
-    isSuccesful: boolean = true
-    statusCode: number = 200
+export class ResultModel<T> {
+  data: any;
+  errorMessages?: string[];
+  isSuccesful: boolean = true;
+  statusCode: number = 200;
 }
