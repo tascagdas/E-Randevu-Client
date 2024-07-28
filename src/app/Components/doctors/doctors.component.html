@@ -16,14 +16,20 @@
   <div class="form-group">
     <div class="row">
       <div class="col-xl-9 col-lg-8 col-md-6 col-sm-12 col-12">
-        <button class="btn btn-success">
+        <button
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#createDoctorModal"
+        >
           <div class="d-flex align-items-center">
             <lucide-icon name="user-plus" class="me-1"></lucide-icon>
             <span>Doktor Ekle</span>
           </div>
         </button>
       </div>
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 position-relative">
+      <div
+        class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12 position-relative"
+      >
         <input type="search" placeholder="Doktor Ara..." class="form-control" />
         <lucide-icon name="search" class="search"></lucide-icon>
       </div>
@@ -43,9 +49,9 @@
       <tbody>
         @for(doctor of doctors; track doctor){
         <tr>
-          <td>{{$index}}</td>
-          <td>{{doctor.fullName}}</td>
-          <td>{{doctor.department}}</td>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ doctor.fullName }}</td>
+          <td>{{ doctor.department.name }}</td>
           <td>
             <button
               class="btn btn-sm btn-outline-warning me-2"
@@ -61,5 +67,74 @@
         }
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="modal fade" id="createDoctorModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Doktor Ekle</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #addModalCloseButton
+        ></button>
+      </div>
+      <form
+        #createDoctorForm="ngForm"
+        formValidate
+        autocomplete="off"
+        (ngSubmit)="add(createDoctorForm)"
+      >
+        <div class="modal-body">
+          <div class="form-group mt-2">
+            <Label>Ad:</Label>
+            <input
+              type="text"
+              [(ngModel)]="createDoctorModel.firstName"
+              name="firstName"
+              class="form-control"
+              required
+              minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>Soyad:</Label>
+            <input
+              type="text"
+              [(ngModel)]="createDoctorModel.lastName"
+              name="lastName"
+              class="form-control"
+              required
+              minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>Departman</Label>
+            <select
+              name="department"
+              class="form-control"
+              [(ngModel)]="createDoctorModel.department"
+              required
+            >
+              <option value="">Departman Seçiniz...</option>
+              @for (department of departments; track department) {
+              <option [value]="department.value">{{ department.name }}</option>
+              }
+            </select>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Ekle</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
