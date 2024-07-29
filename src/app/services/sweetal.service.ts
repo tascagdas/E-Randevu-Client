@@ -21,6 +21,28 @@ export class SweetalService {
       position: 'bottom-end',
     });
   }
+
+  callSweetAlert(
+    title: string,
+    message: string,
+    icon: SweetAlertIcon = 'question',
+    confirmButtonText: string = 'Tamam',
+    callBack:()=> void
+  ) {
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: icon,
+      confirmButtonText: confirmButtonText,
+      confirmButtonColor: confirmButtonText == 'Sil' ? 'red' : '',
+      cancelButtonText: 'Kapat',
+      showCancelButton: true,
+    }).then(resp => {
+      if (resp.isConfirmed) {
+        callBack()
+      }
+    })
+  }
 }
 
 export type SweetAlertIcon =

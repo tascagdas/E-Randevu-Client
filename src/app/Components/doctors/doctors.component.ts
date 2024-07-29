@@ -36,6 +36,9 @@ export class DoctorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllDoctors();
+    this.alert.callSweetAlert('Doktor Sil', 'Seçmiş olduğunuz doktoru kalıcı olarak silmek istediğinizden emin misiniz?', 'question', 'Sil', () => {
+      this.alert.callToast('Başarılı','Silme işlemi başarılı.','success')
+    })
   }
 
   getAllDoctors() {
