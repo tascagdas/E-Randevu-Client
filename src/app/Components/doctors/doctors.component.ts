@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { departments } from '../../Constans/constans';
 import { FormsModule, NgForm } from '@angular/forms';
 import { FormValidateDirective } from 'form-validate-angular';
+import { SweetalService } from '../../services/sweetal.service';
 
 @Component({
   selector: 'app-doctors',
@@ -29,7 +30,9 @@ export class DoctorsComponent implements OnInit {
   @ViewChild('addModalCloseButton') addModalCloseButton:ElementRef<HTMLButtonElement> | undefined
   createDoctorModel: DoctorModel = new DoctorModel();
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService,
+    private alert:SweetalService
+  ) {}
 
   ngOnInit(): void {
     this.getAllDoctors();
@@ -44,7 +47,8 @@ export class DoctorsComponent implements OnInit {
 
   add(form: NgForm) {
     if (form.valid) {
-      this.http.post<string>('Doctors/CreateDoctor',this.createDoctorModel,(resp) => {
+      this.http.post<string>('Doctors/CreateDoctor', this.createDoctorModel, (resp) => {
+          this.alert.callToast('Ekleme Başarılı', resp.data,'success');
           this.getAllDoctors();
           this.addModalCloseButton.nativeElement.click()
           this.createDoctorModel = new DoctorModel();
