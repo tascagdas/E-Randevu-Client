@@ -7,14 +7,14 @@ import Swal from 'sweetalert2';
 export class SweetalService {
   constructor() {}
 
-  callToast(title: string,message:string, icon: SweetAlertIcon = 'info') {
+  callToast(title: string,message:string, icon: SweetAlertIcon = 'info',duration:number = 3000) {
     Swal.fire({
       title: title,
       text: message,
       icon: icon,
       // confirmButtonText: 'Cool',
-      timer: 3000,
-      showConfirmButton:false,
+      timer: duration,
+      showConfirmButton: false,
       showCloseButton: true,
       showCancelButton: false,
       toast: true,
