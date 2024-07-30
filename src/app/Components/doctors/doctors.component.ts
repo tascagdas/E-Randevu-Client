@@ -56,4 +56,12 @@ export class DoctorsComponent implements OnInit {
       );
     }
   }
+  delete(doctorId: string, fullName: string) {
+    this.alert.callSweetAlert("Doktor Sil", `Seçilen "${fullName}" isimli doktoru kalıcı olarak silmek istediğinizden emin misiniz?`, "question", "Sil", () => {
+      this.http.post<string>("Doctors/DeleteDoctorById", { id: doctorId }, (resp) => {
+        this.alert.callToast("Başarılı", `${fullName} başarıyla silinmiştir. \n ${resp.data}`, "info")
+        this.getAllDoctors();
+    })
+    })
+  }
 }

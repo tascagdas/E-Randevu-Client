@@ -47,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(doctor of doctors; track doctor){
+        @for(doctor of doctors; track doctor.doctorId){
         <tr>
           <td>{{ $index + 1 }}</td>
           <td>{{ doctor.fullName }}</td>
@@ -59,7 +59,11 @@
             >
               <lucide-icon name="file-cog"></lucide-icon>
             </button>
-            <button class="btn btn-sm btn-outline-danger" title="Doktor sil">
+            <button
+              (click)="delete(doctor.doctorId,doctor.fullName)"
+              class="btn btn-sm btn-outline-danger"
+              title="Doktor sil"
+            >
               <lucide-icon name="trash-2"></lucide-icon>
             </button>
           </td>

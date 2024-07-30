@@ -1,7 +1,7 @@
 import { DepartmentModel } from './department.model';
 
 export class DoctorModel {
-  id: string;
+  doctorId: string;
   firstName: string;
   lastName: string;
   fullName: string;
