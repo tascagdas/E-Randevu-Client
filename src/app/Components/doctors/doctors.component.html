@@ -53,7 +53,9 @@
           <td>{{ doctor.fullName }}</td>
           <td>{{ doctor.department.name }}</td>
           <td>
-            <button
+            <button (click)="getDataBeforeUpdate(doctor)"
+            data-bs-toggle="modal"
+            data-bs-target="#updateDoctorModal"
               class="btn btn-sm btn-outline-warning me-2"
               title="Bilgi Guncelle"
             >
@@ -74,6 +76,10 @@
   </div>
 </div>
 
+
+
+
+<!-- Create Modal -->
 <div class="modal fade" id="createDoctorModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -123,7 +129,80 @@
             <select
               name="department"
               class="form-control"
-              [(ngModel)]="createDoctorModel.department"
+              [(ngModel)]="createDoctorModel.departmentValue"
+              required
+            >
+              <option [value]=0>Departman Seçiniz...</option>
+              @for (department of departments; track department) {
+              <option [value]="department.value">{{ department.name }}</option>
+              }
+            </select>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Ekle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateDoctorModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Doktor Güncelle</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #updateModalCloseButton
+        ></button>
+      </div>
+      <form
+        #updateDoctorForm="ngForm"
+        formValidate
+        autocomplete="off"
+        (ngSubmit)="update(updateDoctorForm)"
+      >
+        <div class="modal-body">
+          <div class="form-group mt-2">
+            <Label>Ad:</Label>
+            <input
+              type="text"
+              [(ngModel)]="updateDoctorModel.firstName"
+              name="updateFirstName"
+              class="form-control"
+              required
+              minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>Soyad:</Label>
+            <input
+              type="text"
+              [(ngModel)]="updateDoctorModel.lastName"
+              name="updateLastName"
+              class="form-control"
+              required
+              minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>Departman</Label>
+            <select
+              name="updateDepartment"
+              class="form-control"
+              [(ngModel)]="updateDoctorModel.departmentValue"
               required
             >
               <option value="">Departman Seçiniz...</option>
@@ -136,7 +215,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Ekle</button>
+          <button type="submit" class="btn btn-success">Güncelle</button>
         </div>
       </form>
     </div>

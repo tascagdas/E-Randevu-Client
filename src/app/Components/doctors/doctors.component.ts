@@ -28,7 +28,9 @@ export class DoctorsComponent implements OnInit {
   departments = departments;
 
   @ViewChild('addModalCloseButton') addModalCloseButton:ElementRef<HTMLButtonElement> | undefined
+  @ViewChild('updateModalCloseButton') updateModalCloseButton:ElementRef<HTMLButtonElement> | undefined
   createDoctorModel: DoctorModel = new DoctorModel();
+  updateDoctorModel: DoctorModel = new DoctorModel();
 
   constructor(private http: HttpService,
     private alert:SweetalService
@@ -50,7 +52,7 @@ export class DoctorsComponent implements OnInit {
       this.http.post<string>('Doctors/CreateDoctor', this.createDoctorModel, (resp) => {
           this.alert.callToast('Ekleme Başarılı', resp.data,'success');
           this.getAllDoctors();
-          this.addModalCloseButton.nativeElement.click()
+          this.addModalCloseButton?.nativeElement.click()
           this.createDoctorModel = new DoctorModel();
         }
       );
@@ -63,5 +65,24 @@ export class DoctorsComponent implements OnInit {
         this.getAllDoctors();
     })
     })
+  }
+
+  getDataBeforeUpdate(data : DoctorModel) {
+    this.updateDoctorModel = { ...data };
+    this.updateDoctorModel.departmentValue = data.department.value;
+  }
+
+  update(_t117: NgForm) {
+    if (_t117.valid) {
+      this.http.post<string>(
+        'Doctors/UpdateDoctor',
+        this.updateDoctorModel,
+        (resp) => {
+          this.alert.callToast('Ekleme Başarılı', resp.data, 'success');
+          this.getAllDoctors();
+          this.updateModalCloseButton?.nativeElement.click();
+        }
+      );
+    }
   }
 }
