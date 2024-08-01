@@ -8,6 +8,7 @@ import { departments } from '../../Constans/constans';
 import { FormsModule, NgForm } from '@angular/forms';
 import { FormValidateDirective } from 'form-validate-angular';
 import { SweetalService } from '../../services/sweetal.service';
+import { DoctorPipe } from '../../pipes/doctor.pipe';
 
 @Component({
   selector: 'app-doctors',
@@ -18,6 +19,7 @@ import { SweetalService } from '../../services/sweetal.service';
     CommonModule,
     FormsModule,
     FormValidateDirective,
+    DoctorPipe
   ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css',
@@ -35,6 +37,8 @@ export class DoctorsComponent implements OnInit {
   constructor(private http: HttpService,
     private alert:SweetalService
   ) {}
+
+  search: string;
 
   ngOnInit(): void {
     this.getAllDoctors();
