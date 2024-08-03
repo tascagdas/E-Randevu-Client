@@ -1,5 +1,5 @@
 export class PatientModel{
-    id: string
+    patientId: string
     firstName: string
     lastName: string
     fullName: string

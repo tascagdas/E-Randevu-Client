@@ -8,6 +8,7 @@ import { FormValidateDirective } from 'form-validate-angular';
 import { PatientPipe } from '../../pipes/patient.pipe';
 import { HttpService } from '../../services/http.service';
 import { SweetalService } from '../../services/sweetal.service';
+import { HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-patients',
@@ -52,8 +53,8 @@ export class PatientsComponent implements OnInit {
 
   add(form: NgForm) {
     if (form.valid) {
-      this.http.post<string>(
-        'patients/CreatePatient',
+      this.http.post<HttpStatusCode>(
+        'patients/createpatient',
         this.createPatientModel,
         (resp) => {
           this.alert.callToast('Ekleme Başarılı', resp.data, 'success');
@@ -71,7 +72,7 @@ export class PatientsComponent implements OnInit {
       'question',
       'Sil',
       () => {
-        this.http.post<string>(
+        this.http.post<HttpStatusCode>(
           'patients/DeletePatientById',
           { id: patientId },
           (resp) => {
@@ -94,8 +95,8 @@ export class PatientsComponent implements OnInit {
 
   update(_t117: NgForm) {
     if (_t117.valid) {
-      this.http.post<string>(
-        'Doctors/UpdateDoctor',
+      this.http.post<HttpStatusCode>(
+        'Patients/Updatepatient',
         this.updatePatientModel,
         (resp) => {
           this.alert.callToast('Ekleme Başarılı', resp.data, 'success');

@@ -19,7 +19,7 @@
         <button
           class="btn btn-success"
           data-bs-toggle="modal"
-          data-bs-target="#createDoctorModal"
+          data-bs-target="#createPatientModal"
         >
           <div class="d-flex align-items-center">
             <lucide-icon name="user-plus" class="me-1"></lucide-icon>
@@ -33,7 +33,7 @@
         <input
           type="search"
           [(ngModel)]="search"
-          placeholder="Doktor Ara..."
+          placeholder="Hasta Ara..."
           class="form-control"
         />
         <lucide-icon name="search" class="search"></lucide-icon>
@@ -53,7 +53,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(patient of patients | patient : search; track patient.id){
+        @for(patient of patients | patient : search; track patient.patientId){
         <tr>
           <td>{{ $index + 1 }}</td>
           <td>{{ patient.fullName }}</td>
@@ -63,16 +63,16 @@
             <button
               (click)="getDataBeforeUpdate(patient)"
               data-bs-toggle="modal"
-              data-bs-target="#updateDoctorModal"
+              data-bs-target="#updatePatientModal"
               class="btn btn-sm btn-outline-warning me-2"
               title="Bilgi Guncelle"
             >
               <lucide-icon name="file-cog"></lucide-icon>
             </button>
             <button
-              (click)="delete(patient.id, patient.fullName)"
+              (click)="delete(patient.patientId, patient.fullName)"
               class="btn btn-sm btn-outline-danger"
-              title="Doktor sil"
+              title="Hasta sil"
             >
               <lucide-icon name="trash-2"></lucide-icon>
             </button>
@@ -85,7 +85,12 @@
 </div>
 
 <!-- Create Modal -->
-<div class="modal fade" id="createDoctorModal" tabindex="-1" aria-hidden="true">
+<div
+  class="modal fade"
+  id="createPatientModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -99,10 +104,10 @@
         ></button>
       </div>
       <form
-        #createDoctorForm="ngForm"
+        #createPatientForm="ngForm"
         formValidate
         autocomplete="off"
-        (ngSubmit)="add(createDoctorForm)"
+        (ngSubmit)="add(createPatientForm)"
       >
         <div class="modal-body">
           <div class="form-group mt-2">
@@ -126,6 +131,18 @@
               class="form-control"
               required
               minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>TC Kimlik Numarası:</Label>
+            <input
+              type="text"
+              [(ngModel)]="createPatientModel.identityNumber"
+              name="identityNumber"
+              class="form-control"
+              required
+              minlength="11"
             />
             <div class="invalid-feedback"></div>
           </div>
@@ -175,7 +192,12 @@
 </div>
 
 <!-- Update Modal -->
-<div class="modal fade" id="updateDoctorModal" tabindex="-1" aria-hidden="true">
+<div
+  class="modal fade"
+  id="updatePatientModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -189,10 +211,10 @@
         ></button>
       </div>
       <form
-        #updateDoctorForm="ngForm"
+        #updatePatientForm="ngForm"
         formValidate
         autocomplete="off"
-        (ngSubmit)="update(updateDoctorForm)"
+        (ngSubmit)="update(updatePatientForm)"
       >
         <div class="modal-body">
           <div class="form-group mt-2">
@@ -216,6 +238,18 @@
               class="form-control"
               required
               minlength="3"
+            />
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="form-group mt-2">
+            <Label>TC Kimlik Numarası:</Label>
+            <input
+              type="text"
+              [(ngModel)]="updatePatientModel.identityNumber"
+              name="identityNumber"
+              class="form-control"
+              required
+              minlength="11"
             />
             <div class="invalid-feedback"></div>
           </div>
