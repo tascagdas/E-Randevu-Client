@@ -47,6 +47,7 @@
         <tr>
           <th>#</th>
           <th>İsim</th>
+          <th>TC Kimlik No</th>
           <th>İl / İlçe</th>
           <th>Adres</th>
           <th>İşlemler</th>
@@ -57,6 +58,7 @@
         <tr>
           <td>{{ $index + 1 }}</td>
           <td>{{ patient.fullName }}</td>
+          <td>{{ patient.identityNumber}}</td>
           <td>{{ patient.city }} / {{ patient.town }}</td>
           <td>{{ patient.fullAddress }}</td>
           <td>
