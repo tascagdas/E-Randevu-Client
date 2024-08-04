@@ -61,6 +61,7 @@ export class PatientsComponent implements OnInit {
           this.getAllPatients();
           this.addModalCloseButton?.nativeElement.click();
           this.createPatientModel = new PatientModel();
+          form.resetForm();
         }
       );
     }

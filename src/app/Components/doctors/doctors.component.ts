@@ -57,7 +57,8 @@ export class DoctorsComponent implements OnInit {
           this.alert.callToast('Ekleme Başarılı', resp.data,'success');
           this.getAllDoctors();
           this.addModalCloseButton?.nativeElement.click()
-          this.createDoctorModel = new DoctorModel();
+        this.createDoctorModel = new DoctorModel();
+        form.resetForm();
         }
       );
     }
