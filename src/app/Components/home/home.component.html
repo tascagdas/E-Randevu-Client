@@ -29,7 +29,14 @@
       </select>
     </div>
     }
-
-    <div class="mt-2"></div>
+  </div>
+  <div class="mt-2">
+    <dx-scheduler id="scheduler" [dataSource]="dummyAppointments"
+    textExpr="title"
+    allDayExpr="allDay"
+    recurrenceRuleExpr="recurrence"
+    [(currentDate)]="currentDate">
+      <!-- Configuration goes here -->
+    </dx-scheduler>
   </div>
 </div>

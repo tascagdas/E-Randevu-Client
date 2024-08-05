@@ -1,3 +1,4 @@
+import { Appointment } from 'devextreme/ui/scheduler';
 import { DepartmentModel } from '../models/department.model';
 
 export const api: string = 'https://localhost:7053/api/';
