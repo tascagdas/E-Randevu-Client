@@ -10,6 +10,7 @@
         name="department"
         class="form-control"
         [(ngModel)]="selectedDepartmentValue"
+        (change)="getDoctors()"
       >
         <option [value]="-1">Seçiniz...</option>
         @for (department of departments; track department.value) {
@@ -19,14 +20,22 @@
     </div>
 
     @if(selectedDepartmentValue > -1){
-    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mt-1">
-      <label>Doktor</label>
-      <select name="doctor" class="form-control" [(ngModel)]="selectedDoctorId">
-        <option [value]="0">Doktor Seçiniz...</option>
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 mt-1">
+      <label>Doktor:</label>
+      @if(doctors.length == 0){
+      <input type="text" class="form-control" disabled value="Doktor Bulunamadı" />
+      }@else {
+      <select
+       name="doctor"
+       class="form-control"
+       [(ngModel)]="selectedDoctorId"
+       (change)="getAppointments()"
+       >
         @for (doctor of doctors; track doctor.doctorId) {
         <option [value]="doctor.doctorId">{{ doctor.fullName }}</option>
         }
       </select>
+      }
     </div>
     }
   </div>
