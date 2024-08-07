@@ -7,6 +7,7 @@ import { DxSchedulerModule } from 'devextreme-angular';
 import { locale } from 'devextreme/localization';
 import { HttpService } from '../../services/http.service';
 import { AppointmentModel } from '../../models/appointment.model';
+declare var $:any
 
 
 @Component({
