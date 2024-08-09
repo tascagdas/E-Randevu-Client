@@ -7,7 +7,7 @@ import { DxSchedulerModule } from 'devextreme-angular';
 import { locale } from 'devextreme/localization';
 import { HttpService } from '../../services/http.service';
 import { AppointmentModel } from '../../models/appointment.model';
-import { AppointmentAddedEvent, AppointmentFormOpeningEvent } from 'devextreme/ui/scheduler';
+import { AppointmentAddedEvent, AppointmentDeletedEvent, AppointmentFormOpeningEvent } from 'devextreme/ui/scheduler';
 import { CreateAppointmentModel } from '../../models/create-appointment.model';
 import { FormValidateDirective } from 'form-validate-angular';
 import { SweetalService } from '../../services/sweetal.service';
@@ -69,7 +69,7 @@ export class HomeComponent {
 
   onAppointmentFormOpening(event: AppointmentFormOpeningEvent) {
     const form = event.form;
-    console.log(form);
+
     form.itemOption('description', { visible: false });
     form.itemOption('identityNumber', {
       editorType: 'dxTextBox',
@@ -102,6 +102,19 @@ export class HomeComponent {
     this.http.post<string>('Appointments/CreateByIdentityNumber', this.createAppointmentModel, resp => {
       this.alert.callToast("Başarılı",resp.data,"success")
     });
-    console.log(this.createAppointmentModel)
+  }
+
+  deleteAppointment(e: AppointmentDeletedEvent) {
+    this.alert.callSweetAlert("Silmek istediğinize emin misiniz?", "Silmek istediğiniz randevuya ait bilgiler silinecektir.", "warning", "Sil", () => {
+          this.http.post<string>(
+            'Appointments/DeleteByAppointmentId',
+            {
+              AppointmentId: e.appointmentData['id'],
+            },
+            (resp) => {
+              this.alert.callToast('Başarılı', resp.data, 'success');
+            }
+          );
+    })
   }
 }
