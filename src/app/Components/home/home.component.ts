@@ -69,29 +69,16 @@ export class HomeComponent {
   }
 
   onAppointmentFormOpening(event: AppointmentFormOpeningEvent) {
-    const form = event.form;
-
-    this.createAppointmentModel.startDate =
-      this.date.transform(
-        event.appointmentData.startDate,
-        'dd.MM.yyyy HH:mm'
-      ) ?? '';
-
-    this.createAppointmentModel.endDate =
-      this.date.transform(event.appointmentData.endDate, 'dd.MM.yyyy HH:mm') ??
-      '';
 
     this.createAppointmentModel.doctorId = this.selectedDoctorId;
 
-    // $('#createAppointmentModal').modal("show");
   }
 
   createAppointment(e: AppointmentAddedEvent) {
+    this.createAppointmentModel.startDate = this.date.transform(e.appointmentData.startDate,'dd.MM.yyyy HH:mm') ?? '';
+    this.createAppointmentModel.endDate = this.date.transform(e.appointmentData.endDate,'dd.MM.yyyy HH:mm') ?? '';
     this.createAppointmentModel.identityNumber = e.appointmentData.description;
-    this.http.post<string>(
-      'Appointments/CreateByIdentityNumber',
-      this.createAppointmentModel,
-      (resp) => {
+    this.http.post<string>('Appointments/CreateByIdentityNumber',this.createAppointmentModel,(resp) => {
         this.alert.callToast('Başarılı', resp.data, 'success');
       }
     );
