@@ -16,7 +16,7 @@ export class ErrorService {
 
     let message = "Hata"
     if (error.status == 0) {
-      message = "Sunucuya şuan ulaşılamıyor.";
+      message = error.message;
     } else if (error.status == 404) {
       message = 'API-404 Yapılan istek bulunamadı.';
     } else if (error.status == 500) {

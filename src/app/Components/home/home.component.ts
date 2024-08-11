@@ -11,6 +11,7 @@ import { AppointmentAddedEvent, AppointmentDeletedEvent, AppointmentFormOpeningE
 import { CreateAppointmentModel } from '../../models/create-appointment.model';
 import { FormValidateDirective } from 'form-validate-angular';
 import { SweetalService } from '../../services/sweetal.service';
+import notify from 'devextreme/ui/notify';
 
 declare var $: any;
 
@@ -82,6 +83,11 @@ export class HomeComponent {
         this.alert.callToast('Başarılı', resp.data, 'success');
       }
     );
+    if (e.appointmentData.description) {
+    notify('Randevu eklendi', 'success', 1000);
+    }else{
+      notify('Açıklama kısmına hastanın TC Kimlik Numarasını giriniz.', 'error', 3000);
+    }
   }
 
   deleteAppointment(e: AppointmentDeletedEvent) {
@@ -111,19 +117,14 @@ export class HomeComponent {
       'Appointments/UpdateAppointment',
       {
         AppointmentId: e.appointmentData['id'],
-        startDate: this.date.transform(
-          e.appointmentData.startDate,
-          'dd.MM.yyyy HH:mm'
-        ),
-        endDate: this.date.transform(
-          e.appointmentData.endDate,
-          'dd.MM.yyyy HH:mm'
-        ),
+        startDate: this.date.transform(e.appointmentData.startDate,'dd.MM.yyyy HH:mm'),
+        endDate: this.date.transform(e.appointmentData.endDate,'dd.MM.yyyy HH:mm'),
       },
       (resp) => {
         this.alert.callToast('Başarılı', resp.data, 'info');
         this.getAppointments();
       }
     );
+    notify("Randevu güncellendi.", "info", 3000);
   }
 }
