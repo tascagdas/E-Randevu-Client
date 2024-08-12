@@ -8,9 +8,17 @@ import { ErrorService } from './error.service';
   providedIn: 'root',
 })
 export class HttpService {
+token:string
+
   constructor(private http: HttpClient,
     private errorService : ErrorService
-  ) {}
+  ) {
+    if (localStorage.getItem("token") != null) {
+      this.token = localStorage.getItem("token")!;
+    } else {
+      this.token = "";
+    }
+  }
 
   post<T>(
     apiUrl: string,
@@ -18,7 +26,7 @@ export class HttpService {
     successCallback: (resp: ResultModel<T>) => void,
     errorCallback?: (err: HttpErrorResponse) => void
   ) {
-    this.http.post<ResultModel<T>>(`${api}${apiUrl}`, body).subscribe({
+    this.http.post<ResultModel<T>>(`${api}${apiUrl}`, body,{headers:{"Authorization":"Bearer " + this.token}}).subscribe({
       next: (resp) => {
           successCallback(resp);
       },

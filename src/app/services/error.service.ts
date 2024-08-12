@@ -17,12 +17,14 @@ export class ErrorService {
     let message = "Hata"
     if (error.status == 0) {
       message = error.message;
+    } else if (error.status == 401) {
+      message = 'API-401 Yetkisiz Erişim.';
     } else if (error.status == 404) {
       message = 'API-404 Yapılan istek bulunamadı.';
     } else if (error.status == 500) {
       for (const e of error.error.errorMessages) {
-        message = "";
-        message += e + "\n";
+        message = '';
+        message += e + '\n';
       }
     }
 
