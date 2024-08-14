@@ -49,6 +49,7 @@
           <th>İsim</th>
           <th>Kullanıcı Adı</th>
           <th>Email</th>
+          <th>Roles</th>
           <th>İşlemler</th>
         </tr>
       </thead>
@@ -59,6 +60,13 @@
           <td>{{ user.fullName }}</td>
           <td>{{ user.userName }}</td>
           <td>{{ user.email }}</td>
+          <td>
+            <ul>
+              @for(r of user.roleNames; track r){
+              <li>{{ r }}</li>
+              }
+            </ul>
+          </td>
           <td>
             <button
               (click)="getDataBeforeUpdate(user)"
@@ -85,12 +93,7 @@
 </div>
 
 <!-- Create Modal -->
-<div
-  class="modal fade"
-  id="createUserModal"
-  tabindex="-1"
-  aria-hidden="true"
->
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -172,10 +175,16 @@
           </div>
           <div class="form-group mt-2">
             <Label>Rol:</Label>
-            <select class="form-control" multiple required [(ngModel)]="createUserModel.roleIds" name="roleIds">
-                @for (role of roles; track role) {
-                    <option [value]="role.id">{{role.name}}</option>
-                }
+            <select
+              class="form-control"
+              multiple
+              required
+              [(ngModel)]="createUserModel.roleIds"
+              name="roleIds"
+            >
+              @for (role of roles; track role) {
+              <option [value]="role.id">{{ role.name }}</option>
+              }
             </select>
             <div class="invalid-feedback"></div>
           </div>
@@ -190,12 +199,7 @@
 </div>
 
 <!-- Update Modal -->
-<div
-  class="modal fade"
-  id="updateUserModal"
-  tabindex="-1"
-  aria-hidden="true"
->
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -265,22 +269,17 @@
             <div class="invalid-feedback"></div>
           </div>
           <div class="form-group mt-2">
-            <Label>Parola:</Label>
-            <input
-              type="password"
-              name="updatePassword"
-              [(ngModel)]="updateUserModel.password"
-              class="form-control"
-              required
-            />
-            <div class="invalid-feedback"></div>
-          </div>
-          <div class="form-group mt-2">
             <Label>Rol:</Label>
-            <select class="form-control" multiple required [(ngModel)]="updateUserModel.roleIds" name="updateRoleIds">
-                @for (role of roles; track role) {
-                    <option [value]="role.id">{{role.name}}</option>
-                }
+            <select
+              class="form-control"
+              multiple
+              required
+              [(ngModel)]="updateUserModel.roleIds"
+              name="updateRoleIds"
+            >
+              @for (role of roles; track role) {
+              <option [value]="role.id">{{ role.name }}</option>
+              }
             </select>
             <div class="invalid-feedback"></div>
           </div>

@@ -39,27 +39,30 @@ export class UsersComponent implements OnInit {
   createUserModel: UserModel = new UserModel();
   updateUserModel: UserModel = new UserModel();
 
-  constructor(
-    private http: HttpService,
-    private alert: SweetalService
-  ) { }
+  constructor(private http: HttpService, private alert: SweetalService) {}
 
   search: string;
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllRoles();
   }
 
   getAllUsers() {
-    this.http.post<UserModel[]>('Users/getallusers', {}, (resp) => {
+    this.http.post<UserModel[]>('Users/GetAll', {}, (resp) => {
       this.users = resp.data;
+    });
+  }
+  getAllRoles() {
+    this.http.post<RoleModel[]>('Users/GetAllRoles', {}, (res) => {
+      this.roles = res.data;
     });
   }
 
   add(form: NgForm) {
     if (form.valid) {
       this.http.post<HttpStatusCode>(
-        'Users/createuser',
+        'Users/Create',
         this.createUserModel,
         (resp) => {
           this.alert.callToast('Ekleme Başarılı', resp.data, 'success');
@@ -79,7 +82,7 @@ export class UsersComponent implements OnInit {
       'Sil',
       () => {
         this.http.post<HttpStatusCode>(
-          'Users/DeleteUserById',
+          'Users/DeleteById',
           { id: userId },
           (resp) => {
             this.alert.callToast(
@@ -101,7 +104,7 @@ export class UsersComponent implements OnInit {
   update(_t117: NgForm) {
     if (_t117.valid) {
       this.http.post<HttpStatusCode>(
-        'Users/Updateuser',
+        'Users/Update',
         this.updateUserModel,
         (resp) => {
           this.alert.callToast('Ekleme Başarılı', resp.data, 'success');
