@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,9 @@ import { LucideAngularModule } from 'lucide-angular';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-constructor(private router : Router){}
+  constructor(private router: Router,
+  public auth: AuthService
+){}
 
   signOut() {
     localStorage.removeItem("token");
